@@ -1,10 +1,19 @@
 import 'package:chopper_demo/data/post_api_service.dart';
 import 'package:chopper_demo/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  _setLoggin();
   runApp(const MyApp());
+}
+
+void _setLoggin() {
+  Logger.root.level = Level.ALL;
+  Logger.root.onRecord.listen((event) {
+    print('${event.level.name}${event.time} ${event.message}');
+  });
 }
 
 class MyApp extends StatelessWidget {
