@@ -33,6 +33,13 @@ FutureBuilder<Response> _buildBody(BuildContext context) {
     future: Provider.of<PostApiService>(context).getPosts(),
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.done) {
+        if (snapshot.hasError) {
+          return Center(
+            child: Text(
+              snapshot.error.toString(),
+            ),
+          );
+        }
         final List post = json.decode(snapshot.data!.bodyString);
         return _buildPost(context, post);
       } else {
